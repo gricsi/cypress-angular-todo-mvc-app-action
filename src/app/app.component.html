@@ -1,0 +1,18 @@
+<div class="container">
+  <form [formGroup]="form" (submit)="onSubmit()" >
+    <div class="form-group">
+      <h1 class="text-center ">Todo App</h1>
+      <div class="input-group-prepend">
+        <input #input1 [formControlName]="'todo'" type="text"  class="form-control new-todo" placeholder="Add Todo" name="todo" data-cy="todo">
+        <span class="input-group-text" (click)="onSubmit()" data-cy="add">
+          <i class="material-icons">add</i>
+        </span>
+      </div>
+    </div>
+    <div class="data">
+      <ul class="list-unstyled" data-cy="todo-list">
+        <li data-cy="list-item" [@moveInLeft]  *ngFor="let todo of todoArray; let i = index">{{todo}} <i (click)="onDeleteItem(i)" class="material-icons" data-cy="delete">delete</i></li>
+      </ul>
+    </div>
+  </form>
+</div>
