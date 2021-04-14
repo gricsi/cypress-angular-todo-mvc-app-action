@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import {allItems} from '../plugins/utils';
+
 describe('Todo App - Angular', () => {
 
   beforeEach( () => {
@@ -28,7 +30,6 @@ describe('Todo App - Angular', () => {
     cy.get('[data-cy=list-item]').should('have.length', 2);
   });
 
-
   it.skip('deletes a todo', () => {
     cy.get('[data-cy=todo]')
     .type('learn testing{enter}')
@@ -37,5 +38,15 @@ describe('Todo App - Angular', () => {
     cy.get('[data-cy=delete]').first().click();
 
     cy.get('[data-cy=list-item]').should('have.length', 1);
+  });
+
+  it('adds items', () => {
+    // create several todos then check the number of items in the list
+    for (let counter = 0; counter < 2; counter++) {
+      cy.get('.new-todo')
+          .type(counter + ' todo {enter}');
+    }
+
+    allItems().should('have.length', 1);
   });
 });
